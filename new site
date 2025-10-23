@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blossomare - Design & Advertising Agency</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1f2937;
+            --secondary: #6b7280;
+            --light: #f9fafb;
+            --border: #e5e7eb;
+            --white: #ffffff;
+            --black: #000000;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-600: #4b5563;
+            --gray-900: #111827;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background-color: var(--white);
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: scaleY(0);
+                opacity: 0;
+            }
+            to {
+                transform: scaleY(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border);
+            z-index: 50;
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--gray-900);
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+        }
+
+        .logo:hover {
+            color: var(--gray-700);
+        }
+
+        .nav-menu {
+            display: none;
+            gap: 2rem;
+        }
+
+        .nav-menu.desktop {
+            display: flex;
+        }
+
+        .nav-menu button {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-menu button:hover {
+            color: var(--gray-900);
+        }
+
+        .nav-menu button.active {
+            color: var(--gray-900);
+            border-bottom-color: var(--gray-900);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 64px;
+            left: 0;
+            right: 0;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            cursor: pointer;
+            border: none;
+            background: none;
+            transition: color 0.3s;
+        }
+
+        .mobile-menu button:hover {
+            color: var(--gray-900);
+            background-color: var(--gray-50);
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu.desktop {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 64px;
+        }
+
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(to bottom right, var(--white), var(--gray-50), var(--gray-100));
+        }
+
+        .hero-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background-color: var(--black);
+            transform-origin: top center;
+            animation: slideInDown 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--gray-900);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 400px;
+            background-color: var(--gray-100);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--gray-900);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--gray-800);
+        }
+
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--gray-900);
+            border: 2px solid var(--gray-900);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--gray-100);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 1rem;
+        }
+
+        .section-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: bold;
+            margin-bottom: 3rem;
+        }
+
+        .section-title.center {
+            text-align: center;
+        }
+
+        /* Page Header with Black Bar */
+        .page-header {
+            position: relative;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(to bottom right, var(--white), var(--gray-50));
+        }
+
+        .page-header-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background-color: var(--black);
+            animation: slideInDown 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .service-card {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            transition: box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--gray-600);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-color: var(--gray-900);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.25rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            color: var(--gray-300);
+            margin-bottom: 2rem;
+        }
+
+        /* About Page */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .info-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item h3 {
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .info-item p {
+            color: var(--gray-600);
+        }
+
+        /* Services Page */
+        .service-detail {
+            margin-bottom: 3rem;
+        }
+
+        .service-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .service-detail-grid.reverse {
+            direction: rtl;
+        }
+
+        .service-detail-grid.reverse > * {
+            direction: ltr;
+        }
+
+        .service-detail h2 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-detail p {
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .service-detail ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .service-detail li {
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .placeholder {
+            width: 100%;
+            height: 320px;
+            background-color: var(--gray-100);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            font-weight: 500;
+        }
+
+        /* Works Page */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .work-card {
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            transition: box-shadow 0.3s;
+            background-color: var(--gray-50);
+        }
+
+        .work-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .work-card h3 {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .work-card p {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        /* Community Page */
+        .community-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .community-text h2 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .community-text p {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--gray-900);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .feature-content p {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        .community-image {
+            width: 100%;
+            height: 400px;
+            background-color: var(--gray-100);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .community-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Contact Page */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact-intro p {
+            color: var(--gray-600);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gray-900);
+            box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--gray-900);
+            color: var(--white);
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .form-submit:hover {
+            background-color: var(--gray-800);
+        }
+
+        .contact-methods {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-methods h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .method-item h3 {
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .method-item p {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+        }
+
+        .method-item a {
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .method-item a:hover {
+            color: var(--gray-900);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--gray-900);
+            color: var(--white);
+            padding: 3rem 1rem;
+            margin-top: 5rem;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.125rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p {
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gray-800);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-grid,
+            .about-grid,
+            .community-grid,
+            .service-detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2.25rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.875rem;
+            }
+
+            .hero-line,
+            .page-header-bar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <button class="logo" onclick="showPage('home')">Blossomare</button>
+            
+            <div class="nav-menu desktop">
+                <button onclick="showPage('home')" class="nav-item active" data-page="home">トップ</button>
+                <button onclick="showPage('about')" class="nav-item" data-page="about">会社概要</button>
+                <button onclick="showPage('services')" class="nav-item" data-page="services">サービス紹介</button>
+                <button onclick="showPage('works')" class="nav-item" data-page="works">実績紹介</button>
+                <button onclick="showPage('community')" class="nav-item" data-page="community">コミュニティ紹介</button>
+                <button onclick="showPage('contact')" class="nav-item" data-page="contact">お問い合わせ</button>
+            </div>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <button onclick="showPageMobile('home')">トップ</button>
+            <button onclick="showPageMobile('about')">会社概要</button>
+            <button onclick="showPageMobile('services')">サービス紹介</button>
+            <button onclick="showPageMobile('works')">実績紹介</button>
+            <button onclick="showPageMobile('community')">コミュニティ紹介</button>
+            <button onclick="showPageMobile('contact')">お問い合わせ</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Page -->
+        <div id="home" class="page-section active">
+            <section class="hero">
+                <div class="hero-line"></div>
+                <div class="hero-content">
+                    <div class="hero-grid">
+                        <div class="hero-text">
+                            <h1>Design &<br>Advertising<br>Together</h1>
+                            <p>デザイン＋広告をワンストップで提供。デザイナーコミュニティによる幅広い制作対応力で、あなたのビジネスを花開かせます。</p>
+                            <button class="btn btn-primary" onclick="showPage('contact')">お問い合わせ</button>
+                        </div>
+                         <div class="hero-image">
+                          
+                          <img src="https://static.wixstatic.com/media/96a67f_fdc3d83b595f4734b74d5f2a13cddcc8~mv2.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section style="background-color: var(--white);">
+                <div class="section-container">
+                    <h2 class="section-title center">OUR SERVICES</h2>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <h3>Design</h3>
+                            <p>ブランディング、UI/UX、グラフィックデザインなど、多様なデザインニーズに対応します。</p>
+                        </div>
+                        <div class="service-card">
+                            <h3>Advertising</h3>
+                            <p>SNS広告、Web広告、マーケティング戦略まで、一貫した広告支援を提供します。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta-section">
+                <div class="section-container">
+                    <h2>あなたのビジネスを花開かせましょう</h2>
+                    <p>デザインと広告で、成果が花開く。</p>
+                    <button class="btn btn-secondary" onclick="showPage('contact')">今すぐ相談する</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Page -->
+        <div id="about" class="page-section">
+            <div class="page-header">
+                <div class="page-header-bar"></div>
+                <div class="page-header-content">
+                    <h1>ABOUT</h1>
+                    <p>会社概要</p>
+                </div>
+            </div>
+
+            <section style="background-color: var(--white);">
+                <div class="section-container">
+                    <div class="about-grid">
+                        <div class="about-text">
+                            <h2>Blossomare（ブロッソマーレ）</h2>
+                            <p>ブロッソマーレは、デザイン＋広告をワンストップで提供するデザインエージェンシーです。デザイナーコミュニティによる幅広い制作対応力で、中小企業から大企業まで、多くのクライアントのビジネス成長を支援しています。</p>
+                            
+                            <div class="info-item">
+                                <h3>会社名</h3>
+                                <p>Blossomare（ブロッソマーレ）</p>
+                            </div>
+                            <div class="info-item">
+                                <h3>所在地</h3>
+                                <p>大阪市</p>
+                            </div>
+                            <div class="info-item">
+                                <h3>設立年</h3>
+                                <p>2025年</p>
+                            </div>
+                            <div class="info-item">
+                                <h3>代表</h3>
+                                <p>櫻本 佑樹</p>
+                            </div>
+                            <div class="info-item">
+                                <h3>連絡先</h3>
+                                <p>08093046985</p>
+                            </div>
+                        </div>
+                         <div class="hero-image">
+                          
+                          <img src="https://static.wixstatic.com/media/96a67f_7fc76d0ac49040cba55c3375b8c0120a~mv2.png" alt="">
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Services Page -->
+        <div id="services" class="page-section">
+            <div class="page-header">
+                <div class="page-header-bar"></div>
+                <div class="page-header-content">
+                    <h1>SERVICE</h1>
+                    <p>サービス紹介</p>
+                </div>
+            </div>
+
+            <section style="background-color: var(--white);">
+                <div class="section-container">
+                    <div class="service-detail">
+                        <div class="service-detail-grid">
+                            <div>
+                                <h2>デザインサービス</h2>
+                                <p>ブランディング、UI/UXデザイン、グラフィックデザイン、Webデザインなど、多様なデザインニーズに対応します。</p>
+                                <ul>
+                                    <li>✓ ロゴ・ブランディング</li>
+                                    <li>✓ Webサイトデザイン</li>
+                                    <li>✓ UI/UXデザイン</li>
+                                    <li>✓ グラフィックデザイン</li>
+                                    <li>✓ パッケージデザイン</li>
+                                </ul>
+                            </div>
+                           <div class="hero-image">
+                          
+                          <img src="https://static.wixstatic.com/media/96a67f_af6ffa028d2b40888ae5c8e563c5aa95~mv2.webp" alt="">
+                       </div>
+                        </div>
+                    </div>
+
+                    <div class="service-detail">
+                        <div class="service-detail-grid reverse">
+                            <div class="hero-image">
+                          
+                          <img src="https://image.cdn2.seaart.me/2025-10-23/d3t2245e878c7388qrl0/4aa749a48d9f12d132310cea7d45cd7d_high.webp" alt="">
+                       </div>
+                            <div>
+                                <h2>広告サービス</h2>
+                                <p>SNS広告、Web広告、マーケティング戦略など、デジタル広告を中心とした包括的な広告支援を提供します。</p>
+                                <ul>
+                                    <li>✓ SNS広告運用（Instagram、X、LINE）</li>
+                                    <li>✓ Google広告</li>
+                                    <li>✓ マーケティング戦略</li>
+                                    <li>✓ コンテンツ制作</li>
+                                    <li>✓ 分析・レポート</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Works Page -->
+        <div id="works" class="page-section">
+            <div class="page-header">
+                <div class="page-header-bar"></div>
+                <div class="page-header-content">
+                    <h1>WORKS</h1>
+                    <p>実績紹介</p>
+                </div>
+            </div>
+
+            <section style="background-color: var(--white);">
+                <div class="section-container">
+                    <div class="works-grid">
+                        <div class="work-card">
+                            <h3>飲食店ブランディング</h3>
+                            <p>新規開店のロゴ・メニューデザイン＋SNS広告運用</p>
+                        </div>
+                        <div class="work-card">
+                            <h3>美容サロンWebサイト</h3>
+                            <p>UI/UXデザイン＋予約システム構築＋Google広告</p>
+                        </div>
+                        <div class="work-card">
+                            <h3>スクール事業拡大</h3>
+                            <p>ブランディング＋パンフレット＋Web広告キャンペーン</p>
+                        </div>
+                        <div class="work-card">
+                            <h3>EC事業立ち上げ</h3>
+                            <p>Webサイト設計＋商品撮影＋広告戦略</p>
+                        </div>
+                        <div class="work-card">
+                            <h3>企業リブランディング</h3>
+                            <p>ロゴ刷新＋ブランドガイドライン＋採用サイト</p>
+                        </div>
+                        <div class="work-card">
+                            <h3>イベント企画・運営</h3>
+                            <p>ポスター制作＋SNS広告＋当日サポート</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Community Page -->
+        <div id="community" class="page-section">
+            <div class="page-header">
+                <div class="page-header-bar"></div>
+                <div class="page-header-content">
+                    <h1>COMMUNITY</h1>
+                    <p>デザイナーコミュニティ</p>
+                </div>
+            </div>
+
+            <section style="background-color: var(--white);">
+                <div class="section-container">
+                    <div class="community-grid">
+                        <div class="community-text">
+                            <h2>多様なデザイナーが集結</h2>
+                            <p>ブロッソマーレは、グラフィックデザイナー、UIデザイナー、Webデザイナー、マーケターなど、多様なスキルを持つデザイナーコミュニティです。</p>
+                            <p>各プロジェクトに最適なデザイナーチームを組成し、クライアントのニーズに応じた柔軟で高品質な制作対応が可能です。</p>
+                            
+                            <div class="feature-item">
+                                <div class="feature-icon">✓</div>
+                                <div class="feature-content">
+                                    <h3>多様なスキルセット</h3>
+                                    <p>デザイン、マーケティング、開発など幅広い領域に対応</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">✓</div>
+                                <div class="feature-content">
+                                    <h3>柔軟なチーム編成</h3>
+                                    <p>プロジェクトに応じた最適なチームを構成</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">✓</div>
+                                <div class="feature-content">
+                                    <h3>継続的なサポート</h3>
+                                    <p>制作後の運用・改善まで一貫してサポート</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="community-image">
+                            <img src="https://static.wixstatic.com/media/96a67f_b62e022597664197b13c810a6ae4ef25~mv2.png" alt="Designer Community" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page-section">
+            <div class="page-header">
+                <div class="page-header-bar"></div>
+                <div class="page-header-content">
+                    <h1>CONTACT</h1>
+                    <p>お問い合わせ</p>
+                </div>
+            </div>
+
+            <section style="background-color: var(--white);">
+                <div class="contact-container">
+                    <div class="contact-intro">
+                        <p>デザイン＋広告に関するご相談やお見積もりは、下記フォームよりお気軽にお問い合わせください。</p>
+                    </div>
+
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">お名前 *</label>
+                            <input type="text" id="name" name="name" placeholder="山田太郎" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">メールアドレス *</label>
+                                <input type="email" id="email" name="email" placeholder="example@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">電話番号</label>
+                                <input type="tel" id="phone" name="phone" placeholder="09012345678">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">会社名</label>
+                            <input type="text" id="company" name="company" placeholder="株式会社○○">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">ご相談内容 *</label>
+                            <textarea id="message" name="message" rows="6" placeholder="ご相談内容をお聞かせください..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="form-submit">送信する</button>
+                    </form>
+
+                    <div class="contact-methods">
+                        <h2>その他のお問い合わせ方法</h2>
+                        <div class="methods-grid">
+                            <div class="method-item">
+                                <h3>電話</h3>
+                                <p>08093046985</p>
+                            </div>
+                            <div class="method-item">
+                                <h3>メール</h3>
+                                <p>info@blossomare.com</p>
+                            </div>
+                            <div class="method-item">
+                                <h3>SNS</h3>
+                                <p><a href="#">Instagram</a></p>
+                                <p><a href="#">X (Twitter)</a></p>
+                                <p><a href="#">LINE</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Blossomare</h3>
+                    <p>デザイン＋広告をワンストップで提供するデザインエージェンシー</p>
+                </div>
+                <div class="footer-section">
+                    <h3>LINKS</h3>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">X (Twitter)</a></li>
+                        <li><a href="#">LINE</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>CONTACT</h3>
+                    <p>info@blossomare.com</p>
+                    <p>08093046985</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Blossomare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentPage = 'home';
+
+        function showPage(page) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(p => p.classList.remove('active'));
+
+            // Show selected page
+            const selectedPage = document.getElementById(page);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+                currentPage = page;
+            }
+
+            // Update nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-page') === page) {
+                    item.classList.add('active');
+                }
+            });
+
+            // Close mobile menu
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.remove('open');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function showPageMobile(page) {
+            showPage(page);
+        }
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('open');
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('お問い合わせありがとうございます。確認後、ご連絡させていただきます。');
+            
+            // Reset form
+            document.querySelector('form').reset();
+        }
+
+        // Initialize
+        showPage('home');
+    </script>
+</body>
+</html>
+
